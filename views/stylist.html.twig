@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Clients</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+
+            <h1>{{ stylist.getStylistName }}</h1>
+
+            {% if clients is not empty %}
+                <h4>List of clients:</h4>
+                    {% for client in clients %}
+                        <li><h5><strong><a href="/clients/{{ client.getId }}">{{ client.getClientName }}</a></strong></h5></li>
+                    {% endfor %}
+            {% else %}
+                <h3>There are no clients for {{ stylist.getStylistName }} stylist yet!</h3>
+            {% endif %}
+
+            <form action="/form_client">
+                <form action="/form_stylist">
+                    <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
+                    <button type="submit" class="btn btn-info">Add new client</button>
+                </form>
+
+            {% if form_check == true %}
+                <form action="/add_client" method="post">
+                    <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
+                    <h4>Enter information about the client</h4>
+                    <div class="form-group">
+                        <label for="client_name">Name</label>
+                        <input id="client_name" name="client_name" class="form-control" type="text" placeholder="Client Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" class="form-control" type="text" placeholder="Client Email" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Client</button>
+                </form>
+            {% endif %}
+            <form action="/">
+                <button type="submit" class="btn btn-primary">Home</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Clients</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+
+            <h1>{{ client.getClientName }}</h1>
+            <ul>
+              <li>{{ client.getEmail }}</li>
+            </ul>
+
+            <form action="/form_client_update">
+                    <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
+                    <button type="submit" class="btn btn-info">Change client information</button>
+            </form>
+
+            {% if form_check != false %}
+                <form action="/update_client" method="post">
+                    <input name="_method" type="hidden" value="patch">
+                    <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
+
+                    <h4>Enter updated information about the client</h4>
+                    <div class="form-group">
+                        <label for="client_name">Name</label>
+                        <input id="client_name" name="client_name" class="form-control" type="text" placeholder="client Name" value="{{ client.getClientName }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" class="form-control" type="text" placeholder="Client Email" value="{{ client.getEmail }}" required>
+                    </div>
+                    <label for = "stylist_id">Stylist</label>
+                    <select class="form-control" id="stylist_id" name="stylist_id" value="{{ client.getStylistId }}">
+                        {% for stylist in stylists %}
+                            {% if client.getStylistId == stylist.getId %}
+                                <option value="{{ stylist.getId }}" selected>{{ stylist.getStylistName }}</option>
+                            {% else %}
+                                <option value="{{ stylist.getId }}">{{ stylist.getStylistName }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            {% endif %}
+            {% for stylist in stylists %}
+                {% if client.getStylistId == stylist.getId %}
+                    <form action="/stylists/{{ client.getStylistId }}">
+                        <button type="submit" class="btn btn-default">List of all {{ stylist.getStylistName }} clients</button>
+                    </form>
+                {% endif %}
+            {% endfor %}
+            <form action="/">
+            <button type="submit" class="btn btn-primary">Home</button>
+        </form>
+        </div>
+    </body>
+</html>

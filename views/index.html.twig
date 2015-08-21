@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Stylists</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Hair Salon Database</h1>
+
+        {% if stylists is not empty %}
+            <h3>List of all stylist types:</h3>
+            <h6>Click on a stylist to see all the clients of that stylist</h6>
+            <ul>
+                {% for stylist in stylists %}
+                    <li><h4><strong><a href="/stylists/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></strong></h4></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>There are no stylists entered yet!</h3>
+        {% endif %}
+
+        <form action="/form_stylist">
+            <button type="submit" class="btn btn-info">Add new stylist</button>
+        </form>
+
+        {% if form_check == true %}
+            <form action="/add_stylist" method="post">
+                <div class="form-group">
+                    <label for="stylist_name">Enter a new stylist</label>
+                    <input id="stylist_name" name="stylist_name" class="form-control" type="text" placeholder="Name" required>
+                </div>
+                <button type="submit" class="btn btn-success">Add Stylist</button>
+            </form>
+        {% endif %}
+        <form action="/delete_stylists" method="post">
+            <button type="submit" class="btn btn-danger">Delete all stylists</button>
+        </form>
+    </div>
+</body>
+</html>

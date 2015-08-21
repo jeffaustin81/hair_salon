@@ -33,7 +33,7 @@
     });
 
     $app->post("/add_stylist", function() use ($app) {
-        $stylist = new Stylist($_POST['type']);
+        $stylist = new Stylist($_POST['stylist_name']);
         $stylist->save();
 
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => false));
@@ -48,7 +48,7 @@
 
     $app->get("/stylists/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
-        return $app['twig']->render('cuisine.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
     });
 
     $app->get("/form_client", function() use ($app) {
@@ -73,7 +73,7 @@
         return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
     });
 
-    $app->get("/form_Client_update", function() use ($app) {
+    $app->get("/form_client_update", function() use ($app) {
         $client = Client::find($_GET['client_id']);
         $stylists = Stylist::getAll();
         return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => true, 'stylists' => $stylists));
