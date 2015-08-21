@@ -58,7 +58,7 @@
 		
 		function updateClient($new_client_name, $id, $new_email, $new_stylist_id)
         {
-            $GLOBALS['DB']->exec("UPDATE restaurants SET client_name = '{$new_client_name}', email = '{$new_email}', stylist_id = {$new_stylist_id} WHERE id = $id;");
+            $GLOBALS['DB']->exec("UPDATE clients SET client_name = '{$new_client_name}', email = '{$new_email}', stylist_id = {$new_stylist_id} WHERE id = $id;");
             $this->setClientName($new_client_name);
             $this->setEmail($new_email);
             $this->setStylistId($new_stylist_id);
