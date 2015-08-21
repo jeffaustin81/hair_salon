@@ -127,5 +127,27 @@
 
             $this->assertEquals($new_client, $test_client);
         }
+        
+        function test_deleteClient()
+        {
+            $stylist_name = "Jen Dontknow";
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $stylist_name2 = "John Doknow";
+            $test_stylist2 = new Stylist($stylist_name2, $id);
+            $test_stylist2->save();
+
+            $test_client = new Client("Jeff Student", $id, "jeffstudent@pcc.edu", $test_stylist->getId());
+            $test_client->save();
+
+            $test_client2 = new Client("Jeff Developer", $id, "jeffdeveloper@epicodus.com", $test_stylist2->getId());
+            $test_client2->save();
+
+            $test_client->deleteClient();
+
+            $this->assertEquals([$test_client2], Client::getAll());
+        }
 	}
 ?>
