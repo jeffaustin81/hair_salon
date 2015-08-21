@@ -82,5 +82,36 @@
             
             $this->assertEquals([$test_stylist, $test_stylist2], $result);
         }
+        
+        function test_updateStylist()
+        {
+            $stylist_name = "Mike Heroku";
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $new_stylist_name = "Kyle Sites";
+
+            $test_stylist->updateStylist($new_stylist_name);
+
+            $this->assertEquals("Kyle Sites", $test_stylist->getStylistName());
+        }
+
+        function test_deleteStylist()
+        {
+            $stylist_name = "Mike Heroku";
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $stylist_name2 = "Kyle Sites";
+            $test_stylist2 = new Stylist($stylist_name2, $id);
+            $test_stylist2->save();
+
+            $test_stylist->deleteStylist();
+
+            $this->assertEquals([$test_stylist2], Stylist::getAll());
+        }
+
 	}
 ?>
