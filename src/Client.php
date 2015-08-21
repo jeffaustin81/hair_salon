@@ -13,7 +13,6 @@
 			$this->id = $id;
 			$this->email = $email;
 			$this->stylist_id = $stylist_id;
-			
 		}
 		
 		function getClientName()
@@ -57,9 +56,22 @@
 			$this->id=$GLOBALS['DB']->lastInsertId();
 		}
 		
-		function getAll()
+		function updateClient($new_client_name, $id, $new_email, $new_stylist_id)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_client_name}', email = '{$new_email}', stylist_id = {$new_stylist_id} WHERE id = $id;");
+            $this->setName($new_client_name);
+            $this->setEmail($new_email);
+            $this->setStylistId($new_stylist_id);
+        }
+		
+		function deleteClient()
 		{
-			$returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients ORDER BY name;");
+			$GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
+		}
+		
+		static function getAll()
+		{
+			$returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients;");
             $clients = array();
             foreach($returned_clients as $client)
             {
@@ -67,10 +79,15 @@
                 $id = $client['id'];
                 $email = $client['email'];
                 $stylist_id = $client['stylist_id'];
-                $new_client = new Restaurant($name, $id, $email, $stylist_id);
+                $new_client = new Client($client_name, $id, $email, $stylist_id);
                 array_push($clients, $new_client);
             }
             return $clients;
+		}
+		
+		static function deleteAll()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM clients;");
 		}
 		
 		

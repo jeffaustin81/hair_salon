@@ -15,13 +15,13 @@
 	
 	class ClientTest extends PHPUnit_Framework_TestCase
     {
-		// protected function teardown()
-		// {
-		// 	Stylist::deleteAll();
-		// 	Client::deleteAll();
-		// }
+		protected function teardown()
+		{
+			Stylist::deleteAll();
+			Client::deleteAll();
+		}
 		
-		function test_getClientName()
+		function testgetClientName()
         {
             $client_name = "Jimmy Angular";
             $id = null;
@@ -34,7 +34,7 @@
             $this->assertEquals($client_name, $result); 
         }
         
-        function test_getId()
+        function testgetId()
         {
             $client_name = "Jackie Node";
             $id = 1;
@@ -47,7 +47,7 @@
             $this->assertEquals(true, is_numeric($result));
         }
         
-        function test_setClientName()
+        function testsetClientName()
         {
             $client_name = "Bob Rails";
             $id = 3;
@@ -64,29 +64,45 @@
             
         }
         
-        // function test_save()
-        // {
-        //     $client_name = "Billy Django";
-        //     $test_client = new Client($stylist_name);
-        //     $test_client->save();
+        function testsave()
+        {
+            $stylist_name = "Sara Gulp";
+			$id = null;
+			$test_stylist = new Stylist($stylist_name, $id);
+			$test_stylist->save();
+			
+			$client_name = "Billy Grunt";
+			$email = "billygrunt99@gmail.com";
+			$stylist_id = $test_stylist->getId();
+            $test_client = new Client($client_name, $id, $email, $stylist_id);
+            $test_client->save();
             
-        //     $result = Client::getAll();
+            $result = Client::getAll();
             
-        //     $this->assertEquals($test_client, $result[0]);
-        // }
+            $this->assertEquals($test_client, $result[0]);
+        }
         
-        // function test_getAll()
-        // {
-        //     $client_name = "Billy Django";
-        //     $client_name2 = "Jack Drupal";
-        //     $test_client = new Client($client_name);
-        //     $test_client->save();
-        //     $test_client2 = new Client($client_name2);
-        //     $test_client2->save();
+        function testgetAll()
+        {
+            $stylist_name = "Edward Scissorhands";
+			$id = null;
+			$test_stylist = new Stylist($stylist_name, $id);
+			$test_stylist->save();
+			
+			$client_name = "Donna Ember";
+            $email = "donnaember4@gmail.com";
+			$stylist_id = $test_stylist->getId();
+            $test_client = new Client($client_name, $id, $email, $stylist_id);
+            $test_client->save();
+			
+			$client_name2 = "Warren Yeoman";
+			$email2 = "warrenyeoman89@gmail.com";
+            $test_client2 = new Client($client_name2, $id, $email2, $stylist_id);
+            $test_client2->save();
             
-        //     $result = Client::getAll();
+            $result = Client::getAll();
             
-        //     $this->assertEquals([$test_client, $test_client2], $result);
-        // }
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
 	}
 ?>

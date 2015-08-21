@@ -18,6 +18,7 @@
 		protected function teardown()
 		{
 			Stylist::deleteAll();
+            Client::deleteAll();
 		}
 		
 		function test_getStylistName()
