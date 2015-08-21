@@ -149,5 +149,33 @@
 
             $this->assertEquals([$test_client2], Client::getAll());
         }
-	}
+        
+        function test_find()
+        {
+            //Arrange
+            $stylist_name = "Hank Airpair";
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $client_name = "Wesley Pong";
+            $stylist_id = $test_stylist->getId();
+            $email = "wesleypong@gmail.com";
+            $test_client = new Client($client_name, $id, $email, $stylist_id);
+            $test_client->save();
+
+            $client_name2 = "Wendy Git";
+            $email = "wendygit@gmail.com";
+            $test_client2 = new Client($client_name2, $id, $email, $stylist_id);
+            $test_client2->save();
+
+            //Act
+            $result = Client::find($test_client->getId());
+
+            //Assert
+            $this->assertEquals($test_client, $result);
+        }
+
+    }
+	
 ?>
