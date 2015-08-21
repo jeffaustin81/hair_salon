@@ -1,12 +1,12 @@
 <?php 
 	class Stylist
 	{
-		private $name;
+		private $stylist_name;
 		private $id;
 		
-		function __construct($name, $id)
+		function __construct($stylist_name, $id)
 		{
-			$this->name = $name;
+			$this->stylist_name = $stylist_name;
 			$this->id = $id;
 		}
 	}	
