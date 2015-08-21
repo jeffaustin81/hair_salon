@@ -82,3 +82,4 @@
             $this->assertEquals([$test_stylist, $test_stylist2], $result);
         }
 	}
+?>
