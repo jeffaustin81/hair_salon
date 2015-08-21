@@ -41,4 +41,19 @@
             
             $this->assertEquals(true, is_numeric($result));
         }
+        
+        function test_setStylistName()
+        {
+            $stylist_name = "Jon Rickles";
+            $id = 2;
+            $test_stylist = new Stylist($stylist_name, $id);
+            
+            $test_stylist->setStylistName("Terra Michalson");
+            
+            $result = $test_stylist->getStylistName();
+            
+            $this->assertEquals("Terra Michalson", $result);
+            
+            
+        }
 	}
