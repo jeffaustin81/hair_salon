@@ -14,5 +14,10 @@
 		{
 			return $this->stylist_name;
 		}
+		
+		function getId()
+		{
+			return $this->id;
+		}
 	}	
 ?>

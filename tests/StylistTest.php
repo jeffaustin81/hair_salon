@@ -23,10 +23,22 @@
 		function test_getStylistName()
         {
             $stylist_name = "Jesse Barnes";
-            $test_stylist = new Stylist($stylist_name);
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
             
-            $result = $test_stylist->getStylistName;
+            $result = $test_stylist->getStylistName();
             
             $this->assertEquals($stylist_name, $result); 
+        }
+        
+        function test_getId()
+        {
+            $stylist_name = "Jackie Burns";
+            $id = 1;
+            $test_stylist = new Stylist($stylist_name, $id);
+            
+            $result = $test_stylist->getId();
+            
+            $this->assertEquals(true, is_numeric($result));
         }
 	}
