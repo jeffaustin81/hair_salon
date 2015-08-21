@@ -96,6 +96,21 @@
 
             $this->assertEquals("Kyle Sites", $test_stylist->getStylistName());
         }
+        
+        function test_find()
+        {
+            $stylist_name = "Maggie Tech";
+            $stylist_name2 = "Rex Silex";
+            $test_stylist = new Stylist($stylist_name);
+            $test_stylist->save();
+            $test_stylist2 = new Stylist($stylist_name2);
+            $test_stylist2->save();
+
+
+            $result = Stylist::find($test_stylist->getId());
+
+            $this->assertEquals($test_stylist, $result);
+        }
 
         function test_deleteStylist()
         {
