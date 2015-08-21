@@ -127,6 +127,29 @@
 
             $this->assertEquals([$test_stylist2], Stylist::getAll());
         }
+        
+        function test_getClients()
+        {
+            $stylist_name = "Hank Airpair";
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $client_name = "Wesley Pong";
+            $stylist_id = $test_stylist->getId();
+            $email = "wesleypong@gmail.com";
+            $test_client = new Client($client_name, $id, $email, $stylist_id);
+            $test_client->save();
+
+            $client_name2 = "Wendy Git";
+            $email = "wendygit@gmail.com";
+            $test_client2 = new Client($client_name2, $id, $email, $stylist_id);
+            $test_client2->save();
+
+            $result = $test_stylist->getClients();
+
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
 
 	}
 ?>
