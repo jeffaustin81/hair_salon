@@ -1,6 +1,8 @@
 <?php
 	
 	require_once __DIR__."/../vendor/autoload.php";
+    require_once __DIR__."/../src/Client.php";
+    require_once __DIR__."/../src/Stylist.php";
 	
 	use Symfony\Component\Debug\Debug;Debug::enable();
 	
@@ -25,73 +27,69 @@
 
     });
 
-    $app->get("/form_cuisine", function() use ($app) {
+    $app->get("/form_stylist", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => true));
 
     });
 
-    $app->post("/add_cuisine", function() use ($app) {
-        $cuisine = new Cuisine($_POST['type']);
-        $cuisine->save();
+    $app->post("/add_stylist", function() use ($app) {
+        $stylist = new Stylist($_POST['type']);
+        $stylist->save();
 
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => false));
 
     });
 
     $app->post("/delete_stylists", function() use ($app) {
-        Cuisine::deleteAll();
+        Stylist::deleteAll();
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll(), 'form_check' => false));
 
     });
 
     $app->get("/stylists/{id}", function($id) use ($app) {
-        $cuisine = Stylist::find($id);
-        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants(), 'form_check' => false));
+        $stylist = Stylist::find($id);
+        return $app['twig']->render('cuisine.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
     });
 
-    $app->get("/form_restaurant", function() use ($app) {
-        $cuisine = Stylist::find($_GET['cuisine_id']);
-        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants(), 'form_check' => true));
+    $app->get("/form_client", function() use ($app) {
+        $stylist = Stylist::find($_GET['stylist_id']);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => true));
     });
 
-    $app->post("/add_restaurant", function() use ($app) {
-        $name = $_POST['name'];
-        $phone = $_POST['phone'];
-        $address = $_POST['address'];
-        $website = $_POST['website'];
-        $cuisine_id = $_POST['cuisine_id'];
-        $restaurant = new Restaurant($name, $id = null, $phone, $address, $website, $cuisine_id);
-        $restaurant->save();
+    $app->post("/add_client", function() use ($app) {
+        $client_name = $_POST['client_name'];
+        $email = $_POST['email'];
+        $stylist_id = $_POST['stylist_id'];
+        $client = new Client($client_name, $id = null, $email, $stylist_id);
+        $client->save();
 
-        $cuisine = Stylist::find($cuisine_id);
-        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants(), 'form_check' => false));
+        $stylist = Stylist::find($stylist_id);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
     });
 
-    $app->get("/restaurants/{id}", function($id) use ($app) {
-        $restaurant = Client::find($id);
+    $app->get("/clients/{id}", function($id) use ($app) {
+        $client = Client::find($id);
         $stylists = Stylist::getAll();
-        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'form_check' => false, 'stylists' => $stylists));
+        return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
     });
 
-    $app->get("/form_restaurant_update", function() use ($app) {
-        $restaurant = Client::find($_GET['restaurant_id']);
+    $app->get("/form_Client_update", function() use ($app) {
+        $client = Client::find($_GET['client_id']);
         $stylists = Stylist::getAll();
-        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'form_check' => true, 'stylists' => $stylists));
+        return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => true, 'stylists' => $stylists));
     });
 
-    $app->patch("/update_restaurant", function() use ($app) {
-        $name = $_POST['name'];
-        $restaurant_id = $_POST['restaurant_id'];
-        $phone = $_POST['phone'];
-        $address = $_POST['address'];
-        $website = $_POST['website'];
-        $cuisine_id = $_POST['cuisine_id'];
+    $app->patch("/update_client", function() use ($app) {
+        $client_name = $_POST['client_name'];
+        $client_id = $_POST['client_id'];
+        $email = $_POST['email'];
+        $stylist_id = $_POST['stylist_id'];
         $stylists = Stylist::getAll();
 
-        $restaurant = Client::find($restaurant_id);
-        $restaurant->update_restaurant($name, $restaurant_id, $phone, $address, $website, $cuisine_id);
+        $client = Client::find($client_id);
+        $client->updateClient($client_name, $client_id, $email, $stylist_id);
 
-        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'form_check' => false, 'stylists' => $stylists));
+        return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
     });
 
 
