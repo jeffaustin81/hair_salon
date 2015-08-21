@@ -1,32 +1,31 @@
-# _{Application Name}_
+# _Hair Salon_
 
-##### _{Brief description of application}, {Date of current version}_
+##### _Allows users to enter stylists and there clients, August 21st, 2015_
 
-#### By _**{List of contributors}**_
+#### By _**Jeff Austin**_
 
 ## Description
 
-_{This is a detailed description of your application. Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. Do you want other developers to use this code in their apps? Talk about things like that here in simple terms.}_
+_The user can add stylists and there clients and they will be stored in a mysql database. User can also edit clients information_
 
 ## Setup
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
+* _You'll need composer installed_
+* _Run composer install from console_
+* _You will also need to set up a mysql database_
+* _Download MAMP in order to run a local apache server_
 
-_{Leave nothing to chance! You want it to be easy for potential employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Are there other applications this app depends on?}_
+
 
 ## Technologies Used
 
-_{Tell me about the languages you used to create this app. Assume that I know you probably used HTML and CSS. If you did something really cool using only HTML, point that out.}_
+_PHP, Silex, Twig, MySQL, Apache_
 
 ### Legal
 
 *{This is boilerplate legal language. Read through it, and if you like it, use it. There are other license agreements online, but you can generally copy and paste this.}*
 
-Copyright (c) 2015 **_{List of contribtors}_**
+Copyright (c) 2015 **_Jeff Austin_**
 
 This software is licensed under the MIT license.
 
