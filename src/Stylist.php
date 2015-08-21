@@ -9,5 +9,10 @@
 			$this->stylist_name = $stylist_name;
 			$this->id = $id;
 		}
+		
+		function getStylistName()
+		{
+			return $this->stylist_name;
+		}
 	}	
 ?>
