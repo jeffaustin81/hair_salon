@@ -21,7 +21,7 @@
 			Client::deleteAll();
 		}
 		
-		function testgetClientName()
+		function test_getClientName()
         {
             $client_name = "Jimmy Angular";
             $id = null;
@@ -34,7 +34,7 @@
             $this->assertEquals($client_name, $result); 
         }
         
-        function testgetId()
+        function test_getId()
         {
             $client_name = "Jackie Node";
             $id = 1;
@@ -47,7 +47,7 @@
             $this->assertEquals(true, is_numeric($result));
         }
         
-        function testsetClientName()
+        function test_setClientName()
         {
             $client_name = "Bob Rails";
             $id = 3;
@@ -64,7 +64,7 @@
             
         }
         
-        function testsave()
+        function test_save()
         {
             $stylist_name = "Sara Gulp";
 			$id = null;
@@ -82,7 +82,7 @@
             $this->assertEquals($test_client, $result[0]);
         }
         
-        function testgetAll()
+        function test_getAll()
         {
             $stylist_name = "Edward Scissorhands";
 			$id = null;
@@ -103,6 +103,29 @@
             $result = Client::getAll();
             
             $this->assertEquals([$test_client, $test_client2], $result);
+        }
+        
+        function test_updateClient()
+        {
+            $stylist_name = "Sally Vue";
+            $id = null;
+            $test_stylist = new Stylist($stylist_name, $id);
+            $test_stylist->save();
+
+            $stylist_name2 = "Gregory Symfony";
+            $test_stylist2 = new Stylist($stylist_name2, $id);
+            $test_stylist2->save();
+
+            $test_client = new Client("Jenny Google", $id, "jennygoogle@gmail.com", $test_stylist->getId());
+
+            $new_client_name = "Frank React";
+            $new_email = "frankreact@gmail.com";
+            $new_stylist_id = $test_stylist2->getId();
+            $new_client = new Client($new_client_name, $id, $new_email, $new_stylist_id);
+
+            $test_client->updateClient($new_client_name, $id, $new_email, $new_stylist_id);
+
+            $this->assertEquals($new_client, $test_client);
         }
 	}
 ?>
