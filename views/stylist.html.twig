@@ -32,13 +32,13 @@
             {% if form_check == true %}
                 <form action="/add_client" method="post">
                     <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
-                    <h4>Enter information about the client</h4>
+                    <h4 class="white">Enter information about the client</h4>
                     <div class="form-group">
-                        <label for="client_name">Name</label>
+                        <label for="client_name" class="white">Name</label>
                         <input id="client_name" name="client_name" class="form-control" type="text" placeholder="Client Name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email" class="white">Email</label>
                         <input id="email" name="email" class="form-control" type="text" placeholder="Client Email" required>
                     </div>
                     <button type="submit" class="btn btn-success">Add Client</button>

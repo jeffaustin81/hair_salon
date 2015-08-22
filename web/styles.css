@@ -1,3 +1,11 @@
 .client_buttons {
 	display: inline;
 }
+
+body {
+	background-image: url(http://kclub.ca/wp-content/uploads/2012/08/background.jpg);
+}
+
+.white {
+	color: white;
+}
