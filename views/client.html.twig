@@ -5,10 +5,10 @@
     </head>
     <body>
         <div class="container">
-
-            <h1>{{ client.getClientName }}</h1>
-            <ul>
-              <li><h3>{{ client.getEmail }}</h3></li>
+            
+            <ul class="list-group">
+                <li class="list-group-item"><h1>{{ client.getClientName }}</h1></li>        
+                <li class="list-group-item">{{ client.getEmail }}</li>
             </ul>
             
             <form action="/form_client_update">
