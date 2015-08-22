@@ -8,15 +8,22 @@
 
             <h1>{{ client.getClientName }}</h1>
             <ul>
-              <li>{{ client.getEmail }}</li>
+              <li><h3>{{ client.getEmail }}</h3></li>
             </ul>
-
+            
             <form action="/form_client_update">
                     <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
                     <button type="submit" class="btn btn-info">Change client information</button>
             </form>
 
             {% if form_check != false %}
+               <form action="/delete_client/{id}" method="post" class="form-group">
+                    <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
+                    <input id="stylist_id" name="stylist_id" type="hidden" value="{{ client.getStylistId }}">
+                    <input name="_method" type="hidden" value="delete">
+                    <button type="submit" class="btn btn-danger btn-xs">Remove Client</button>
+                </form>
+                
                 <form action="/update_client" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">

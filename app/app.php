@@ -91,6 +91,17 @@
 
         return $app['twig']->render('client.html.twig', array('client' => $client, 'form_check' => false, 'stylists' => $stylists));
     });
+    
+    $app->delete("/delete_client/{id}", function($id) use ($app) {
+        $client_id = $_POST['client_id'];
+        $stylist_id = $_POST['stylist_id'];
+        $stylist = Stylist::find($stylist_id);
+        $client = Client::find($client_id);
+        $client->deleteClient();
+        
+
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients(), 'form_check' => false));
+    });
 
 
     return $app;
