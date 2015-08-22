@@ -1,18 +1,19 @@
 <html>
 <head>
     <title>Stylists</title>
+    <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
         <h1>Welcome to the Hair Salon Database</h1>
-
+        <ul class="list-group">
         {% if stylists is not empty %}
-            <h3>List of all stylist:</h3>
-            <h6>Click on a stylist to see all the clients of that stylist</h6>
-            <ul>
+            <li class="list-group-item"><h3>List of all stylist:</h3>
+            <li class="list-group-item"><h4>Click on a stylist to see client list</h4>
+            <!--<ul class="list-group">-->
                 {% for stylist in stylists %}
-                    <li><h4><strong><a href="/stylists/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></strong></h4></li>
+                    <li class="list-group-item"><h4><strong><a href="/stylists/{{ stylist.getId }}">{{ stylist.getStylistName }}</a></strong></h4></li>
                 {% endfor %}
             </ul>
         {% else %}

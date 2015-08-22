@@ -1,26 +1,32 @@
 <html>
     <head>
         <title>Clients</title>
+        <link rel="stylesheet" href="/styles.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container">
-
-            <h1>{{ stylist.getStylistName }}</h1>
+            <ul class="list-group">
+            <li class="list-group-item"><h1>{{ stylist.getStylistName }}</h1></li>
 
             {% if clients is not empty %}
-                <h4>List of clients:</h4>
+                <li class="list-group-item"><h4>List of clients:</h4></li>
+                
                     {% for client in clients %}
-                        <li><h5><strong><a href="/clients/{{ client.getId }}">{{ client.getClientName }}</a></strong></h5></li>
+                        <li class="list-group-item"><h5><strong><a href="/clients/{{ client.getId }}">{{ client.getClientName }}</a></strong></h5></li>
                     {% endfor %}
+                 
             {% else %}
-                <h3>There are no clients for {{ stylist.getStylistName }} stylist yet!</h3>
+                <li class="list-group-item"><h3>There are no clients for {{ stylist.getStylistName }} stylist yet!</h3></li>
             {% endif %}
-
-            <form action="/form_client">
-                <form action="/form_stylist">
+                </ul>
+                <form action="/form_client" class="client_buttons">
+                <!--<form action="/form_stylist">-->
                     <input id="stylist_id" name="stylist_id" type="hidden" value="{{ stylist.getId() }}">
                     <button type="submit" class="btn btn-info">Add new client</button>
+                </form>
+                <form action="/" class="client_buttons">
+                    <button type="submit" class="btn btn-primary">Home</button>
                 </form>
 
             {% if form_check == true %}
@@ -38,9 +44,6 @@
                     <button type="submit" class="btn btn-success">Add Client</button>
                 </form>
             {% endif %}
-            <form action="/">
-                <button type="submit" class="btn btn-primary">Home</button>
-            </form>
         </div>
     </body>
 </html>
