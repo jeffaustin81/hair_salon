@@ -28,6 +28,12 @@
                 <form action="/" class="client_buttons">
                     <button type="submit" class="btn btn-primary">Home</button>
                 </form>
+                <!--<form action="/delete_stylist/{id}" method="post" class="form-group" class="client_buttons">
+                    <input id="client_id" name="client_id" type="hidden" value="{{ client.getId }}">
+                    <input id="stylist_id" name="stylist_id" type="hidden" value="{{ client.getStylistId }}">
+                    <input name="_method" type="hidden" value="delete">
+                    <button type="submit" class="btn btn-danger btn-xs">Remove Client</button>
+                </form>-->
 
             {% if form_check == true %}
                 <form action="/add_client" method="post">
